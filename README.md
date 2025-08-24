@@ -1,35 +1,54 @@
-# Crypto-Arbs Binance API Test
+npm install
+node server.js
+npm run dev
 
-Tämä projekti on yksinkertainen Node.js + React -sovellus, joka hakee BTCUSDT-hinnan Binancesta ja näyttää sen JSON-muodossa.
+# Crypto-Arbs – Monipörssinen arbitraasihaku
 
-## Käynnistys
+Tämä projekti on Node.js + React -sovellus, joka hakee reaaliaikaiset bid/ask-hinnat useista kryptopörsseistä ja etsii arbitraasimahdollisuuksia USDT-pareille.
+
+## Tuetut pörssit
+
+- Binance
+- Bybit
+- Kraken
+- Coinbase
+- MEXC
+- Gate.io
+- OKX
+- Bitget
+
+## Ominaisuudet
+
+- Hakee bid/ask-hinnat kaikista tuetuista pörsseistä kymmenille USDT-pareille
+- Näyttää vain arbitraasit, joissa voitto ylittää 0.1% (voit muuttaa koodista)
+- Moderni React/Vite-käyttöliittymä
+- Ei vaadi API-avaimia (vain julkiset REST-päätepisteet)
+
+## Käyttöohje
 
 1. Asenna riippuvuudet:
    ```
-npm install
+   npm install
    ```
 2. Käynnistä backend (Express):
    ```
-node server.js
+   node server.js
    ```
 3. Käynnistä frontend (Vite):
    ```
-npm run dev
+   npm run dev
    ```
 
-Avaa selain osoitteeseen http://localhost:5173 ja paina nappia hakeaksesi hinnan Binancesta.
+Avaa selain osoitteeseen http://localhost:5173 (tai porttiin jonka Vite ilmoittaa) ja paina "Etsi arbitraatit"-nappia.
 
----
+## Huomioita
 
-# React + Vite
+- .env-tiedostoa ei tarvita eikä käytetä.
+- Sovellus käyttää vain julkisia REST-päätepisteitä, joten API-avaimia ei tarvita.
+- Jos jokin pörssi palauttaa null-arvoja, kyseinen pari ei ole tuettu kyseisessä pörssissä.
 
-Tämä template tarjoaa minimiasetukset Reactin ja Viten käyttöön.
+## Kehittäminen
 
-Tällä hetkellä on saatavilla kaksi virallista liitintä:
+Voit muokata tuettuja pörssejä ja valuuttapareja tiedostossa `server.js`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) käyttää [Babel](https://babeljs.io/) -työkalua Fast Refreshia varten
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) käyttää [SWC](https://swc.rs/) -työkalua Fast Refreshia varten
-
-## ESLint-konfiguraation laajentaminen
-
-Jos kehität tuotantokäyttöön tarkoitettua sovellusta, suosittelemme TypeScriptin käyttöä, jossa on käytössä tyyppitietoisten lint-sääntöjen tuki. Katso lisätietoja [TS-mallista](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) ja [`typescript-eslint`](https://typescript-eslint.io) -sivustolta projektisi integroimiseksi TypeScriptin kanssa.
+Frontendin logiikka löytyy tiedostosta `src/App.jsx`.
