@@ -8,7 +8,9 @@ const EXCHANGES = [
   { key: 'kraken', name: 'Kraken' },
   { key: 'coinbase', name: 'Coinbase' },
   { key: 'mexc', name: 'MEXC' },
-  { key: 'kucoin', name: 'KuCoin' },
+  { key: 'gateio', name: 'Gate.io' },
+  { key: 'okx', name: 'OKX' },
+  { key: 'bitget', name: 'Bitget' },
 ];
 
 function App() {
@@ -57,21 +59,21 @@ function App() {
 
   return (
     <div style={{ maxWidth: 900, margin: '2rem auto', fontFamily: 'sans-serif' }}>
-      <h1>Yli 1% arbitraasit (Binance, Bybit, Kraken, Coinbase, MEXC)</h1>
+      <h1>Arbitrage opportunities (Binance, Bybit, Kraken, Coinbase, MEXC, Gate.io, OKX, Bitget)</h1>
       <button onClick={fetchArbs} disabled={loading}>
-        {loading ? 'Haetaan...' : 'Etsi arbitraatit'}
+        {loading ? 'Loading...' : 'find arbitrages'}
       </button>
-      {error && <div style={{ color: 'red', marginTop: 16 }}>{error}</div>}
+      {error && <div style={{ color: 'red', marginTop: 16 }}>{'Error fetching from exchanges'}</div>}
       {arbs && arbs.length > 0 ? (
         <table style={{ marginTop: 24, width: '100%', background: '#222', color: '#0f0', borderRadius: 8 }}>
           <thead>
             <tr>
-              <th style={{ textAlign: 'left', padding: 8 }}>Valuutta</th>
-              <th style={{ textAlign: 'left', padding: 8 }}>Osta pörssistä</th>
-              <th style={{ textAlign: 'left', padding: 8 }}>Ostohinta</th>
-              <th style={{ textAlign: 'left', padding: 8 }}>Myy pörssissä</th>
-              <th style={{ textAlign: 'left', padding: 8 }}>Myyntihinta</th>
-              <th style={{ textAlign: 'left', padding: 8 }}>% voitto</th>
+              <th style={{ textAlign: 'left', padding: 8 }}>Pair</th>
+              <th style={{ textAlign: 'left', padding: 8 }}>Buy from</th>
+              <th style={{ textAlign: 'left', padding: 8 }}>Buy price</th>
+              <th style={{ textAlign: 'left', padding: 8 }}>Sell at</th>
+              <th style={{ textAlign: 'left', padding: 8 }}>Sell price</th>
+              <th style={{ textAlign: 'left', padding: 8 }}>% profit</th>
             </tr>
           </thead>
           <tbody>
@@ -88,7 +90,7 @@ function App() {
           </tbody>
         </table>
       ) : arbs && arbs.length === 0 ? (
-        <div style={{ color: '#fff', marginTop: 32, fontSize: 22 }}>Ei yli prosentin arbitraaseja tällä hetkellä</div>
+        <div style={{ color: '#fff', marginTop: 32, fontSize: 22 }}>No arbitrages at the moment</div>
       ) : null}
     </div>
   )
